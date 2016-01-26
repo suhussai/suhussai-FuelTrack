@@ -1,9 +1,12 @@
 package com.example.suhussai.as1;
 
+import java.util.Date;
+
 /**
  * Created by suhussai on 25/01/16.
  */
 public class FuelUsageMessage extends Message {
+    private Date date;
     private String station, fuelGrade;
     private float odometerReading, fuelAmount, fuelUnitCost, fuelCost;
 
@@ -55,9 +58,28 @@ public class FuelUsageMessage extends Message {
         this.fuelCost = fuelCost;
     }
 
-    @Override
-    public String getMessageAsString() {
-        return null;
+    public Date getDate() {
+        return date;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Override
+    public String toString(){
+        return "Date: "+ date.toString() + " \n" +
+                "Station: "+ station + " \n" +
+                "Odometer Reading: "+ Float.toString(odometerReading) + " \n" +
+                "Fuel Grade: "+ fuelGrade + " \n" +
+                "Fuel Amount: "+ Float.toString(fuelAmount) + " \n" +
+                "Fuel Unit Cost: "+ Float.toString(fuelUnitCost) + " \n" +
+                "Fuel Cost: "+ Float.toString(fuelCost) + " \n";
+    }
+
+    @Override
+    public String getMessageAsString() {
+
+        return this.toString();
+    }
 }
