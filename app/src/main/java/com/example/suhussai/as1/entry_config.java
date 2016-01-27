@@ -30,7 +30,6 @@ public class entry_config extends Activity {
 
     private FuelLog log = new FuelLog();
     private FuelUsageEntry itemToEdit = null;
-    private final DateFormat formatter = new SimpleDateFormat("yyyy");
     private static final String FILENAME = "file3.sav"; // from lonelyTwitter
 
 
@@ -91,21 +90,12 @@ public class entry_config extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            //    private String station, fuelGrade;
-/*            String dateStr = extras.getString("Date");
-            Date date = null;
-            try {
-                date = formatter.parse(dateStr);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-*/
             int messageID = extras.getInt("MessageID");
             itemToEdit = log.getEntry(messageID);
 
             EditText editText;
             editText = (EditText) findViewById(R.id.editTextDate);
-            editText.setText(formatter.format(itemToEdit.getDate()));
+            editText.setText(itemToEdit.getDate());
             editText = (EditText) findViewById(R.id.editTextStation);
             editText.setText(itemToEdit.getStation());
             editText = (EditText) findViewById(R.id.editTextFuelGrade);
@@ -160,16 +150,7 @@ public class entry_config extends Activity {
                 float fuelCost = Float.parseFloat(editText.getText().toString());
 
 
-                //itemToEdit.setMessage(new FuelUsageMessage());
-                try {
-                    if (dateTaken != null) {
-                        itemToEdit.setDate(formatter.parse(dateTaken));
-                    } else {
-                        itemToEdit.setDate(formatter.parse("2012"));
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                itemToEdit.setDate(dateTaken);
                 itemToEdit.setStation(station);
                 itemToEdit.setFuelGrade(fuelGrade);
                 itemToEdit.setFuelAmount(fuelAmount);

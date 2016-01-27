@@ -7,12 +7,16 @@ import java.util.Date;
  */
 public abstract class Entry {
     protected int messageID;
-    protected Date date;
+    protected String date;
     public abstract int getMessageID();
-    public abstract Date getDate();
-
     protected abstract void setMessageID();
 
-    public abstract void setDate(Date date);
+    public String getDate() {
+        return this.date;
+    }
+    public void setDate(String date){
+        this.date = date;
+    }
+
     public abstract String toString();
 }

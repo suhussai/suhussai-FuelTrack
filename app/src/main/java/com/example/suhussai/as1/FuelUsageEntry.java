@@ -1,5 +1,7 @@
 package com.example.suhussai.as1;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -73,15 +75,6 @@ public class FuelUsageEntry extends Entry {
 
     public void setFuelCost(float fuelCost) {
         this.fuelCost = fuelCost;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    @Override
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     @Override
