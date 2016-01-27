@@ -32,10 +32,10 @@ import java.util.Date;
 
 public class entry_config extends Activity {
 
-    private Log log = new Log();
-    private Entry<FuelUsageMessage> itemToEdit = null;
+    private FuelLog log = new FuelLog();
+    private FuelUsageEntry itemToEdit = null;
     private final DateFormat formatter = new SimpleDateFormat("yyyy");
-    private static final String FILENAME = "file2.sav"; // from lonelyTwitter
+    private static final String FILENAME = "file3.sav"; // from lonelyTwitter
 
 
     private ArrayList loadFromFile() {
@@ -49,12 +49,12 @@ public class entry_config extends Activity {
 
             Gson gson = new Gson();
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html Jan-21-2016
-            Type listType = new TypeToken<ArrayList<Entry<FuelUsageMessage>>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<FuelUsageEntry>>() {}.getType();
             return gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            return new ArrayList<Entry<FuelUsageMessage>>();
+            return new ArrayList<FuelUsageEntry>();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
@@ -95,7 +95,7 @@ public class entry_config extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            itemToEdit = new Entry<FuelUsageMessage>();
+            itemToEdit = new FuelUsageEntry();
             //    private String station, fuelGrade;
             String dateStr = extras.getString("Date");
             Date date = null;
@@ -111,14 +111,14 @@ public class entry_config extends Activity {
             float fuelUnitCost = extras.getFloat("FuelUnitCost");
             float fuelCost = extras.getFloat("FuelCost");
 
-            itemToEdit.setMessage(new FuelUsageMessage());
-            itemToEdit.getMessage().setDate((Date) date);
-            itemToEdit.getMessage().setStation(station);
-            itemToEdit.getMessage().setFuelGrade(fuelGrade);
-            itemToEdit.getMessage().setFuelAmount(fuelAmount);
-            itemToEdit.getMessage().setOdometerReading(odometerReading);
-            itemToEdit.getMessage().setFuelUnitCost(fuelUnitCost);
-            itemToEdit.getMessage().setFuelCost(fuelCost);
+            //itemToEdit.setMessage(new FuelUsageMessage());
+            itemToEdit.setDate((Date) date);
+            itemToEdit.setStation(station);
+            itemToEdit.setFuelGrade(fuelGrade);
+            itemToEdit.setFuelAmount(fuelAmount);
+            itemToEdit.setOdometerReading(odometerReading);
+            itemToEdit.setFuelUnitCost(fuelUnitCost);
+            itemToEdit.setFuelCost(fuelCost);
 
             EditText editText;
             editText = (EditText) findViewById(R.id.editTextDate);
@@ -166,15 +166,14 @@ public class entry_config extends Activity {
             float fuelUnitCost = extras.getFloat("FuelUnitCost");
             float fuelCost = extras.getFloat("FuelCost");
 
-            itemToEdit = new Entry<FuelUsageMessage>();
-            itemToEdit.setMessage(new FuelUsageMessage());
-            itemToEdit.getMessage().setDate((Date) date);
-            itemToEdit.getMessage().setStation(station);
-            itemToEdit.getMessage().setFuelGrade(fuelGrade);
-            itemToEdit.getMessage().setFuelAmount(fuelAmount);
-            itemToEdit.getMessage().setOdometerReading(odometerReading);
-            itemToEdit.getMessage().setFuelUnitCost(fuelUnitCost);
-            itemToEdit.getMessage().setFuelCost(fuelCost);
+            itemToEdit = new FuelUsageEntry();
+            itemToEdit.setDate((Date) date);
+            itemToEdit.setStation(station);
+            itemToEdit.setFuelGrade(fuelGrade);
+            itemToEdit.setFuelAmount(fuelAmount);
+            itemToEdit.setOdometerReading(odometerReading);
+            itemToEdit.setFuelUnitCost(fuelUnitCost);
+            itemToEdit.setFuelCost(fuelCost);
 
             EditText editText;
             editText = (EditText) findViewById(R.id.editTextDate);
@@ -201,9 +200,9 @@ public class entry_config extends Activity {
                 // remove entry if
                 // editing
                 if (itemToEdit != null) {
-                    log.removeEntry(itemToEdit);
+                    log.removeEntry(itemToEdit.getMessageID());
                 } else {
-                    itemToEdit = new Entry<FuelUsageMessage>();
+                    itemToEdit = new FuelUsageEntry();
                 }
 
                 // add new entry
@@ -224,22 +223,23 @@ public class entry_config extends Activity {
                 float fuelCost = Float.parseFloat(editText.getText().toString());
 
 
-                itemToEdit.setMessage(new FuelUsageMessage());
+                //itemToEdit.setMessage(new FuelUsageMessage());
                 try {
                     if (dateTaken != null) {
-                        itemToEdit.getMessage().setDate(formatter.parse(dateTaken));
+                        itemToEdit.setDate(formatter.parse(dateTaken));
                     } else {
-                        itemToEdit.getMessage().setDate(formatter.parse("2012"));
+                        itemToEdit.setDate(formatter.parse("2012"));
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                itemToEdit.getMessage().setStation(station);
-                itemToEdit.getMessage().setFuelGrade(fuelGrade);
-                itemToEdit.getMessage().setFuelAmount(fuelAmount);
-                itemToEdit.getMessage().setOdometerReading(odometerReading);
-                itemToEdit.getMessage().setFuelUnitCost(fuelUnitCost);
-                itemToEdit.getMessage().setFuelCost(fuelCost);
+                itemToEdit.setStation(station);
+                itemToEdit.setFuelGrade(fuelGrade);
+                itemToEdit.setFuelAmount(fuelAmount);
+                itemToEdit.setOdometerReading(odometerReading);
+                itemToEdit.setFuelUnitCost(fuelUnitCost);
+                itemToEdit.setFuelCost(fuelCost);
+
                 log.addEntry(itemToEdit);
                 saveInFile(log.getLogs());
             }
@@ -260,3 +260,4 @@ public class entry_config extends Activity {
 
     }
 }
+

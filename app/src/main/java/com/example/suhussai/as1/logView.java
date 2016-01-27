@@ -30,8 +30,8 @@ import java.util.ArrayList;
 public class logView extends Activity{
 
     private ListView listView;
-    private static final String FILENAME = "file2.sav"; // from lonelyTwitter
-    private Log log = new Log();
+    private static final String FILENAME = "file3.sav"; // from lonelyTwitter
+    private FuelLog log = new FuelLog();
 
 
     private ArrayList loadFromFile() {
@@ -45,12 +45,12 @@ public class logView extends Activity{
 
             Gson gson = new Gson();
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html Jan-21-2016
-            Type listType = new TypeToken<ArrayList<Entry<FuelUsageMessage>>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<FuelUsageEntry>>() {}.getType();
             return gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            return new ArrayList<Entry<FuelUsageMessage>>();
+            return new ArrayList<FuelUsageEntry>();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
@@ -102,15 +102,16 @@ public class logView extends Activity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Entry<FuelUsageMessage> selectedItem = (Entry<FuelUsageMessage>) listView.getItemAtPosition(position);
+                FuelUsageEntry selectedItem = (FuelUsageEntry) listView.getItemAtPosition(position);
                 Intent intent = new Intent(logView.this, entry_config.class);
                 Format formatter = new SimpleDateFormat("yyyy");
-                intent.putExtra("Date", formatter.format(selectedItem.getMessage().getDate()));
-                intent.putExtra("Station", selectedItem.getMessage().getStation());
-                intent.putExtra("OdometerReading", selectedItem.getMessage().getOdometerReading());
-                intent.putExtra("FuelGrade", selectedItem.getMessage().getFuelGrade());
-                intent.putExtra("FuelUnitCost", selectedItem.getMessage().getFuelUnitCost());
-                intent.putExtra("FuelCost", selectedItem.getMessage().getFuelCost());
+                intent.putExtra("MessageID", selectedItem.getMessageID());
+                intent.putExtra("Date", formatter.format(selectedItem.getDate()));
+                intent.putExtra("Station", selectedItem.getStation());
+                intent.putExtra("OdometerReading", selectedItem.getOdometerReading());
+                intent.putExtra("FuelGrade", selectedItem.getFuelGrade());
+                intent.putExtra("FuelUnitCost", selectedItem.getFuelUnitCost());
+                intent.putExtra("FuelCost", selectedItem.getFuelCost());
                 startActivity(intent);
 
             }
@@ -123,7 +124,7 @@ public class logView extends Activity{
         // TODO Auto-generated method stub
         super.onStart();
         log.setLogs(loadFromFile());
-        ArrayAdapter<Entry<FuelUsageMessage>> adapter = new ArrayAdapter<Entry<FuelUsageMessage>>(this, R.layout.list_item, log.getLogs());
+        ArrayAdapter<FuelUsageEntry> adapter = new ArrayAdapter<FuelUsageEntry>(this, R.layout.list_item, log.getLogs());
         listView.setAdapter(adapter);
 
     }

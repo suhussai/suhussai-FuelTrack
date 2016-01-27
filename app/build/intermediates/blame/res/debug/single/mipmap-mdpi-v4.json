@@ -2,5 +2,9 @@
     {
         "merged": "/home/bobby/StudioProjects/As1/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/ic_launcher.png",
         "source": "/home/bobby/StudioProjects/As1/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/suhussai/StudioProjects/As1/app/build/intermediates/res/merged/debug/mipmap-mdpi-v4/ic_launcher.png",
+        "source": "/home/suhussai/StudioProjects/As1/app/src/main/res/mipmap-mdpi/ic_launcher.png"
     }
 ]

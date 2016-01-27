@@ -17,12 +17,14 @@ public class FuelLog extends Log<FuelUsageEntry>{
         super();
     }
 
+/*  // methods we've inherited already
     public void setLogs(ArrayList<FuelUsageEntry> logs){
         this.logs = logs;
     }
     public void addEntry(FuelUsageEntry fuelUsageEntry){
         this.logs.add(fuelUsageEntry);
     }
+
     public void removeEntry(int messageID){
         for (Entry e: this.logs){
             if (e.getMessageID() == messageID){
@@ -30,7 +32,7 @@ public class FuelLog extends Log<FuelUsageEntry>{
             }
         }
     }
-
+*/
     public float getTotalFuelCost() {
         float total = 0;
         for (FuelUsageEntry e: this.logs){

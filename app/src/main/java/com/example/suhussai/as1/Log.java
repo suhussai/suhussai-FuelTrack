@@ -22,11 +22,11 @@ import android.content.Context;
  * ref:
  * http://stackoverflow.com/questions/28242386/cannot-resolve-method-openfileoutputjava-lang-string-int
  */
-public class Log extends Activity implements totalFuelCalculator{
+public class Log <T extends Entry> {
 
-    private ArrayList<Entry<FuelUsageMessage>> logs;
+    protected ArrayList<T> logs;
 
-    public ArrayList<Entry<FuelUsageMessage>> getLogs() {
+    public ArrayList<T> getLogs() {
         return logs;
     }
 
@@ -34,25 +34,21 @@ public class Log extends Activity implements totalFuelCalculator{
 
     }
 
-    public void setLogs(ArrayList<Entry<FuelUsageMessage>> logs){
+    public void setLogs(ArrayList<T> logs){
         this.logs = logs;
     }
-    public void addEntry(Entry entry){
-        this.logs.add(entry);
+    public void addEntry(T t){
+        this.logs.add(t);
     }
-    public void removeEntry(Entry entry){
-        this.logs.remove(entry);
-    }
-
-
-    @Override
-    public float getTotalFuelCost() {
-        float total = 0;
-        for (Entry<FuelUsageMessage> e: this.logs){
-            total += e.getMessage().getFuelCost();
+    public void removeEntry(int messageID){
+        for (Entry e: this.logs){
+            if (e.getMessageID() == messageID){
+                this.logs.remove(e);
+            }
         }
-        return total;
     }
+
+
 
 
 }

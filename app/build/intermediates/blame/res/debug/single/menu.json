@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/home/suhussai/StudioProjects/As1/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
+        "source": "/home/suhussai/StudioProjects/As1/app/src/main/res/menu/menu_main.xml"
+    },
+    {
         "merged": "/home/bobby/StudioProjects/As1/app/build/intermediates/res/merged/debug/menu/menu_main.xml",
         "source": "/home/bobby/StudioProjects/As1/app/src/main/res/menu/menu_main.xml"
     }
