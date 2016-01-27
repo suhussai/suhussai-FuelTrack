@@ -2,7 +2,6 @@ package com.example.suhussai.as1;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -106,12 +105,6 @@ public class logView extends Activity{
                 Intent intent = new Intent(logView.this, entry_config.class);
                 Format formatter = new SimpleDateFormat("yyyy");
                 intent.putExtra("MessageID", selectedItem.getMessageID());
-                intent.putExtra("Date", formatter.format(selectedItem.getDate()));
-                intent.putExtra("Station", selectedItem.getStation());
-                intent.putExtra("OdometerReading", selectedItem.getOdometerReading());
-                intent.putExtra("FuelGrade", selectedItem.getFuelGrade());
-                intent.putExtra("FuelUnitCost", selectedItem.getFuelUnitCost());
-                intent.putExtra("FuelCost", selectedItem.getFuelCost());
                 startActivity(intent);
 
             }
