@@ -119,41 +119,6 @@ public class entry_config extends Activity {
             editText = (EditText) findViewById(R.id.editTextFuelCost);
             editText.setText(Float.toString(itemToEdit.getFuelCost()));
 
-
-/*
-            String station = extras.getString("Station");
-            String fuelGrade = extras.getString("FuelGrade");
-            float fuelAmount = extras.getFloat("FuelAmount");
-            float odometerReading = extras.getFloat("OdometerReading");
-            float fuelUnitCost = extras.getFloat("FuelUnitCost");
-            float fuelCost = extras.getFloat("FuelCost");
-
-            itemToEdit = new FuelUsageEntry();
-            itemToEdit.setDate((Date) date);
-            itemToEdit.setStation(station);
-            itemToEdit.setFuelGrade(fuelGrade);
-            itemToEdit.setFuelAmount(fuelAmount);
-            itemToEdit.setOdometerReading(odometerReading);
-            itemToEdit.setFuelUnitCost(fuelUnitCost);
-            itemToEdit.setFuelCost(fuelCost);
-
-            EditText editText;
-            editText = (EditText) findViewById(R.id.editTextDate);
-            editText.setText(formatter.format(date));
-            editText = (EditText) findViewById(R.id.editTextStation);
-            editText.setText(station);
-            editText = (EditText) findViewById(R.id.editTextFuelGrade);
-            editText.setText(fuelGrade);
-            editText = (EditText) findViewById(R.id.editTextFuelAmount);
-            editText.setText(Float.toString(fuelAmount));
-            editText = (EditText) findViewById(R.id.editTextOdometerReading);
-            editText.setText(Float.toString(odometerReading));
-            editText = (EditText) findViewById(R.id.editTextFuelUnitCost);
-            editText.setText(Float.toString(fuelUnitCost));
-            editText = (EditText) findViewById(R.id.editTextFuelCost);
-            editText.setText(Float.toString(fuelCost));
-*/
-
         }
     }
 

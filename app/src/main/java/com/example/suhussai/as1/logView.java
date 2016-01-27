@@ -103,7 +103,6 @@ public class logView extends Activity{
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FuelUsageEntry selectedItem = (FuelUsageEntry) listView.getItemAtPosition(position);
                 Intent intent = new Intent(logView.this, entry_config.class);
-                Format formatter = new SimpleDateFormat("yyyy");
                 intent.putExtra("MessageID", selectedItem.getMessageID());
                 startActivity(intent);
 

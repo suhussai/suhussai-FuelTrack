@@ -36,7 +36,6 @@ public class Log <T extends Entry> {
     }
     public T getEntry(int messageID) {
         Iterator<T> iter = logs.iterator();
-
         while (iter.hasNext()) {
             T t2 = iter.next();
 
