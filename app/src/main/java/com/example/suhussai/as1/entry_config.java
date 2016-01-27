@@ -95,15 +95,36 @@ public class entry_config extends Activity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            itemToEdit = new FuelUsageEntry();
             //    private String station, fuelGrade;
-            String dateStr = extras.getString("Date");
+/*            String dateStr = extras.getString("Date");
             Date date = null;
             try {
                 date = formatter.parse(dateStr);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+*/
+            int messageID = extras.getInt("MessageID");
+            itemToEdit = log.getEntry(messageID);
+
+            EditText editText;
+            editText = (EditText) findViewById(R.id.editTextDate);
+            editText.setText(formatter.format(itemToEdit.getDate()));
+            editText = (EditText) findViewById(R.id.editTextStation);
+            editText.setText(itemToEdit.getStation());
+            editText = (EditText) findViewById(R.id.editTextFuelGrade);
+            editText.setText(itemToEdit.getFuelGrade());
+            editText = (EditText) findViewById(R.id.editTextFuelAmount);
+            editText.setText(Float.toString(itemToEdit.getFuelAmount()));
+            editText = (EditText) findViewById(R.id.editTextOdometerReading);
+            editText.setText(Float.toString(itemToEdit.getOdometerReading()));
+            editText = (EditText) findViewById(R.id.editTextFuelUnitCost);
+            editText.setText(Float.toString(itemToEdit.getFuelUnitCost()));
+            editText = (EditText) findViewById(R.id.editTextFuelCost);
+            editText.setText(Float.toString(itemToEdit.getFuelCost()));
+
+
+/*
             String station = extras.getString("Station");
             String fuelGrade = extras.getString("FuelGrade");
             float fuelAmount = extras.getFloat("FuelAmount");
@@ -111,7 +132,7 @@ public class entry_config extends Activity {
             float fuelUnitCost = extras.getFloat("FuelUnitCost");
             float fuelCost = extras.getFloat("FuelCost");
 
-            //itemToEdit.setMessage(new FuelUsageMessage());
+            itemToEdit = new FuelUsageEntry();
             itemToEdit.setDate((Date) date);
             itemToEdit.setStation(station);
             itemToEdit.setFuelGrade(fuelGrade);
@@ -135,10 +156,9 @@ public class entry_config extends Activity {
             editText.setText(Float.toString(fuelUnitCost));
             editText = (EditText) findViewById(R.id.editTextFuelCost);
             editText.setText(Float.toString(fuelCost));
-
+*/
 
         }
-
     }
 
 
@@ -148,51 +168,7 @@ public class entry_config extends Activity {
         setContentView(R.layout.activity_entry_config);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         log.setLogs(loadFromFile());
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            //    private String station, fuelGrade;
-            String dateStr = extras.getString("Date");
-            Date date = null;
-            try {
-                date = formatter.parse(dateStr);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            String station = extras.getString("Station");
-            String fuelGrade = extras.getString("FuelGrade");
-            float fuelAmount = extras.getFloat("FuelAmount");
-            float odometerReading = extras.getFloat("OdometerReading");
-            float fuelUnitCost = extras.getFloat("FuelUnitCost");
-            float fuelCost = extras.getFloat("FuelCost");
-
-            itemToEdit = new FuelUsageEntry();
-            itemToEdit.setDate((Date) date);
-            itemToEdit.setStation(station);
-            itemToEdit.setFuelGrade(fuelGrade);
-            itemToEdit.setFuelAmount(fuelAmount);
-            itemToEdit.setOdometerReading(odometerReading);
-            itemToEdit.setFuelUnitCost(fuelUnitCost);
-            itemToEdit.setFuelCost(fuelCost);
-
-            EditText editText;
-            editText = (EditText) findViewById(R.id.editTextDate);
-            editText.setText(formatter.format(date));
-            editText = (EditText) findViewById(R.id.editTextStation);
-            editText.setText(station);
-            editText = (EditText) findViewById(R.id.editTextFuelGrade);
-            editText.setText(fuelGrade);
-            editText = (EditText) findViewById(R.id.editTextFuelAmount);
-            editText.setText(Float.toString(fuelAmount));
-            editText = (EditText) findViewById(R.id.editTextOdometerReading);
-            editText.setText(Float.toString(odometerReading));
-            editText = (EditText) findViewById(R.id.editTextFuelUnitCost);
-            editText.setText(Float.toString(fuelUnitCost));
-            editText = (EditText) findViewById(R.id.editTextFuelCost);
-            editText.setText(Float.toString(fuelCost));
-
-
-        }
+        itemToEdit = null;
 
         Button btnSaveEntryConfig = (Button) findViewById(R.id.btnSaveEntryConfig);
         btnSaveEntryConfig.setOnClickListener(new View.OnClickListener() {
@@ -201,7 +177,8 @@ public class entry_config extends Activity {
                 // editing
                 if (itemToEdit != null) {
                     log.removeEntry(itemToEdit.getMessageID());
-                } else {
+                }
+                else{
                     itemToEdit = new FuelUsageEntry();
                 }
 
@@ -240,8 +217,14 @@ public class entry_config extends Activity {
                 itemToEdit.setFuelUnitCost(fuelUnitCost);
                 itemToEdit.setFuelCost(fuelCost);
 
-                log.addEntry(itemToEdit);
-                saveInFile(log.getLogs());
+                if (log.has(itemToEdit.getMessageID())) {
+                    // log already contains this entry
+                    // so ignore it
+                }
+                else {
+                    log.addEntry(itemToEdit);
+                    saveInFile(log.getLogs());
+                }
             }
 
         });

@@ -10,6 +10,9 @@ public abstract class Entry {
     protected Date date;
     public abstract int getMessageID();
     public abstract Date getDate();
+
+    protected abstract void setMessageID();
+
     public abstract void setDate(Date date);
     public abstract String toString();
 }

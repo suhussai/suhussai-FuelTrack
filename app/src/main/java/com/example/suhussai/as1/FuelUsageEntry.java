@@ -9,9 +9,18 @@ public class FuelUsageEntry extends Entry {
     private String station, fuelGrade;
     private float odometerReading, fuelAmount, fuelUnitCost, fuelCost;
 
+    public FuelUsageEntry() {
+        messageID = 0;
+    }
+
     @Override
     public int getMessageID() {
         return messageID;
+    }
+
+    @Override
+    protected void setMessageID(){
+        messageID = fuelGrade.hashCode() + station.hashCode();
     }
 
     public String getStation() {
@@ -20,6 +29,7 @@ public class FuelUsageEntry extends Entry {
 
     public void setStation(String station) {
         this.station = station;
+        messageID += this.station.hashCode();
     }
 
     public String getFuelGrade() {
@@ -28,6 +38,7 @@ public class FuelUsageEntry extends Entry {
 
     public void setFuelGrade(String fuelGrade) {
         this.fuelGrade = fuelGrade;
+        messageID += this.fuelGrade.hashCode();
     }
 
     public float getOdometerReading() {
@@ -36,6 +47,7 @@ public class FuelUsageEntry extends Entry {
 
     public void setOdometerReading(float odometerReading) {
         this.odometerReading = odometerReading;
+
     }
 
     public float getFuelAmount() {
@@ -52,6 +64,7 @@ public class FuelUsageEntry extends Entry {
 
     public void setFuelUnitCost(float fuelUnitCost) {
         this.fuelUnitCost = fuelUnitCost;
+        messageID += Float.toString(this.fuelUnitCost).hashCode();
     }
 
     public float getFuelCost() {

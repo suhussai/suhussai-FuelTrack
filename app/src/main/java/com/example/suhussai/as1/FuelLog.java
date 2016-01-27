@@ -7,11 +7,6 @@ import java.util.ArrayList;
  */
 public class FuelLog extends Log<FuelUsageEntry>{
 
-    private ArrayList<FuelUsageEntry> logs;
-
-    public ArrayList<FuelUsageEntry> getLogs() {
-        return logs;
-    }
 
     public FuelLog() {
         super();
