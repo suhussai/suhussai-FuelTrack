@@ -1,20 +1,15 @@
-package com.example.suhussai.as1;
+package com.example.suhussai.as1.controller;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
+import android.content.Context;
+import android.content.ContextWrapper;
 
+import com.example.suhussai.as1.model.FuelLog;
+import com.example.suhussai.as1.model.FuelUsageEntry;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -24,11 +19,54 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class logView extends Activity{
-
-    private ListView listView;
+/**
+ * Created by suhussai on 27/01/16.
+ */
+public class AppController extends ContextWrapper{
     private static final String FILENAME = "file3.sav"; // from lonelyTwitter
     private FuelLog log = new FuelLog();
+    private int messageIDToEdit = -1;
+
+    public AppController(Context base) {
+        super(base);
+        this.log.setLogs(loadFromFile());
+    }
+
+    public void removeEntry(int ID) {
+        log.removeEntry(ID);
+    }
+
+    public FuelUsageEntry getEntry(int ID) {
+        return log.getEntry(ID);
+    }
+
+    public void addEntry(String dateTaken, String station, String fuelGrade,
+                         float fuelAmount, float odometerReading, float fuelUnitCost,
+                         float fuelCost){
+        FuelUsageEntry fuelUsageEntry = new FuelUsageEntry();
+        fuelUsageEntry.setDate(dateTaken);
+        fuelUsageEntry.setStation(station);
+        fuelUsageEntry.setFuelGrade(fuelGrade);
+        fuelUsageEntry.setFuelAmount(fuelAmount);
+        fuelUsageEntry.setOdometerReading(odometerReading);
+        fuelUsageEntry.setFuelUnitCost(fuelUnitCost);
+        fuelUsageEntry.setFuelCost(fuelCost);
+
+        if (log.has(fuelUsageEntry.getMessageID())) {
+            // do nothing
+        }else {
+            log.addEntry(fuelUsageEntry);
+        }
+    }
+
+    public int getMessageIDToEdit() {
+        return messageIDToEdit;
+    }
+
+    public void setMessageIDToEdit(int messageIDToEdit) {
+        this.messageIDToEdit = messageIDToEdit;
+    }
+
 
 
     private ArrayList loadFromFile() {
@@ -79,45 +117,5 @@ public class logView extends Activity{
         }
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_view);
-        log.setLogs(loadFromFile());
-
-        listView = (ListView) findViewById(R.id.listView);
-
-        Button btnBack = (Button) findViewById(R.id.btnBack);
-        Button btnSelect = (Button) findViewById(R.id.btnSelect);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                setResult(RESULT_OK);
-                startActivity(new Intent(logView.this, MainActivity.class));
-            }
-        });
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FuelUsageEntry selectedItem = (FuelUsageEntry) listView.getItemAtPosition(position);
-                Intent intent = new Intent(logView.this, entry_config.class);
-                intent.putExtra("MessageID", selectedItem.getMessageID());
-                startActivity(intent);
-
-            }
-        });
-
-    }
-
-    @Override
-    protected void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-        log.setLogs(loadFromFile());
-        ArrayAdapter<FuelUsageEntry> adapter = new ArrayAdapter<FuelUsageEntry>(this, R.layout.list_item, log.getLogs());
-        listView.setAdapter(adapter);
-
-    }
 
 }
-

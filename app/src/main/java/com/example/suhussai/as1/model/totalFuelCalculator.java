@@ -1,4 +1,4 @@
-package com.example.suhussai.as1;
+package com.example.suhussai.as1.model;
 
 /**
  * Created by suhussai on 25/01/16.

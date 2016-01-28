@@ -1,11 +1,9 @@
-package com.example.suhussai.as1;
-
-import java.util.ArrayList;
+package com.example.suhussai.as1.model;
 
 /**
  * Created by suhussai on 26/01/16.
  */
-public class FuelLog extends Log<FuelUsageEntry>{
+public class FuelLog extends Log<FuelUsageEntry> {
 
 
     public FuelLog() {

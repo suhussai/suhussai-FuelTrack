@@ -1,8 +1,6 @@
-package com.example.suhussai.as1;
+package com.example.suhussai.as1.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.example.suhussai.as1.model.Entry;
 
 /**
  * Created by suhussai on 25/01/16.
