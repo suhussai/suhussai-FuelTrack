@@ -1,31 +1,16 @@
 package com.example.suhussai.as1.model;
 
+import android.content.Context;
+
 /**
  * Created by suhussai on 26/01/16.
  */
 public class FuelLog extends Log<FuelUsageEntry> {
 
 
-    public FuelLog() {
-        super();
+    public FuelLog(Context base) {
+        super(base);
     }
-
-/*  // methods we've inherited already
-    public void setLogs(ArrayList<FuelUsageEntry> logs){
-        this.logs = logs;
-    }
-    public void addEntry(FuelUsageEntry fuelUsageEntry){
-        this.logs.add(fuelUsageEntry);
-    }
-
-    public void removeEntry(int messageID){
-        for (Entry e: this.logs){
-            if (e.getMessageID() == messageID){
-                this.logs.remove(e);
-            }
-        }
-    }
-*/
 
     public void addEntry(String dateTaken, String station, String fuelGrade,
                          float fuelAmount, float odometerReading, float fuelUnitCost,

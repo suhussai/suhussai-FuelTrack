@@ -23,17 +23,16 @@ import java.util.ArrayList;
  * Created by suhussai on 27/01/16.
  */
 public class AppController extends ContextWrapper{
-    private static final String FILENAME = "file.sav"; // from lonelyTwitter
-    private FuelLog log = new FuelLog();
+    private FuelLog log = null;
     private int messageIDToEdit = -1;
 
     public AppController(Context base) {
         super(base);
-        this.log.setLogs(loadFromFile());
+        log = new FuelLog(base);
     }
 
     public void saveData(){
-        saveInFile(this.log.getLogs());
+        log.save();
     }
 
     public void removeEntry(int ID) {
@@ -70,53 +69,6 @@ public class AppController extends ContextWrapper{
     }
 
 
-    private ArrayList<FuelUsageEntry> loadFromFile() {
-        /*
-            Function taken from lonelyTwitter Project.
-            https://github.com/shidahe/lonelyTwitter
-         */
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-
-            Gson gson = new Gson();
-            // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html Jan-21-2016
-            Type listType = new TypeToken<ArrayList<FuelUsageEntry>>() {}.getType();
-            return gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            return new ArrayList<FuelUsageEntry>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-
-    }
-
-    private void saveInFile(ArrayList<FuelUsageEntry> logs) {
-        /*
-            Function taken from lonelyTwitter Project.
-            https://github.com/shidahe/lonelyTwitter
-         */
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    0);
-
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-            Gson gson = new Gson();
-            gson.toJson(logs, out);
-            out.flush();
-
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }
 
 
     public ArrayList getLogs() {

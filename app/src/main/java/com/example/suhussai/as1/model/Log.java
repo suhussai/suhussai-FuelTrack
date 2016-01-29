@@ -1,5 +1,8 @@
 package com.example.suhussai.as1.model;
 
+import android.content.Context;
+import android.provider.ContactsContract;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,8 +16,14 @@ import com.example.suhussai.as1.model.Entry;
 public class Log <T extends Entry> {
 
     protected ArrayList<T> logs;
-    public Log() {
-        this.logs = new ArrayList<T>();
+    private DataFileIO<T> dataFileIO = null;
+    public Log(Context base) {
+        dataFileIO = new DataFileIO<>(base);
+        this.logs = dataFileIO.loadFromFile();
+    }
+
+    public void save(){
+        dataFileIO.saveInFile(logs);
     }
     public ArrayList<T> getLogs() {
         return logs;
