@@ -64,8 +64,15 @@ public class logView extends Activity{
         listView.setAdapter(adapter);
         TextView textView = (TextView) findViewById(R.id.textViewTotalCost);
         appController = AppControllerHandler.getAppController(this);
-        textView.setText("Total Cost: $"+Float.toString(appController.getTotalCost()));
+        textView.setText("Total Cost: $" + Float.toString(appController.getTotalCost()));
     }
+
+    @Override
+    public void onDestroy() {
+        appController.saveData();
+        super.onDestroy();
+    }
+
 
 }
 

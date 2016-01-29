@@ -23,13 +23,17 @@ import java.util.ArrayList;
  * Created by suhussai on 27/01/16.
  */
 public class AppController extends ContextWrapper{
-    private static final String FILENAME = "file3.sav"; // from lonelyTwitter
+    private static final String FILENAME = "file.sav"; // from lonelyTwitter
     private FuelLog log = new FuelLog();
     private int messageIDToEdit = -1;
 
     public AppController(Context base) {
         super(base);
         this.log.setLogs(loadFromFile());
+    }
+
+    public void saveData(){
+        saveInFile(this.log.getLogs());
     }
 
     public void removeEntry(int ID) {
@@ -77,7 +81,7 @@ public class AppController extends ContextWrapper{
     }
 
 
-    private ArrayList loadFromFile() {
+    private ArrayList<FuelUsageEntry> loadFromFile() {
         /*
             Function taken from lonelyTwitter Project.
             https://github.com/shidahe/lonelyTwitter
@@ -101,7 +105,7 @@ public class AppController extends ContextWrapper{
 
     }
 
-    private void saveInFile(ArrayList logs) {
+    private void saveInFile(ArrayList<FuelUsageEntry> logs) {
         /*
             Function taken from lonelyTwitter Project.
             https://github.com/shidahe/lonelyTwitter

@@ -89,10 +89,13 @@ public class entry_config extends Activity {
                 appController.setMessageIDToEdit(-1);
             }
         });
-
-
-
-
     }
+
+    @Override
+    public void onDestroy() {
+        appController.saveData();
+        super.onDestroy();
+    }
+
 }
 
