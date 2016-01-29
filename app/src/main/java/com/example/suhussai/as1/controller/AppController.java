@@ -40,6 +40,10 @@ public class AppController extends ContextWrapper{
         return log.getEntry(ID);
     }
 
+    public float getTotalCost(){
+        return log.getTotalFuelCost();
+    }
+
     public void addEntry(String dateTaken, String station, String fuelGrade,
                          float fuelAmount, float odometerReading, float fuelUnitCost,
                          float fuelCost){
@@ -67,6 +71,10 @@ public class AppController extends ContextWrapper{
         this.messageIDToEdit = messageIDToEdit;
     }
 
+    public void setMessageIDToEdit(Object fuelUsageEntry) {
+        FuelUsageEntry fuelUsageEntry1 = (FuelUsageEntry) fuelUsageEntry;
+        this.messageIDToEdit = fuelUsageEntry1.getMessageID();
+    }
 
 
     private ArrayList loadFromFile() {
@@ -118,4 +126,7 @@ public class AppController extends ContextWrapper{
     }
 
 
+    public ArrayList getLogs() {
+        return log.getLogs();
+    }
 }
