@@ -54,7 +54,7 @@ public class entry_config extends Activity {
             public void onClick(View v) {
                 // remove entry if
                 // editing
-                if (appController.getMessageIDToEdit() == -1) {
+                if (appController.getMessageIDToEdit() != -1) {
                     appController.removeEntry(appController.getMessageIDToEdit());
                 }
 
@@ -86,7 +86,7 @@ public class entry_config extends Activity {
             public void onClick(View v) {
                 setResult(RESULT_OK);
                 startActivity(new Intent(entry_config.this, MainActivity.class));
-
+                appController.setMessageIDToEdit(-1);
             }
         });
 
