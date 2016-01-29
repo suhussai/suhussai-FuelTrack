@@ -13,7 +13,9 @@ import com.example.suhussai.as1.model.Entry;
 public class Log <T extends Entry> {
 
     protected ArrayList<T> logs;
-    public Log() {}
+    public Log() {
+        this.logs = new ArrayList<T>();
+    }
     public ArrayList<T> getLogs() {
         return logs;
     }
