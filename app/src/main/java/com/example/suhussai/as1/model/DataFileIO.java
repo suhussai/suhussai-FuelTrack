@@ -20,14 +20,14 @@ import java.util.ArrayList;
 /**
  * Created by suhussai on 29/01/16.
  */
-public class DataFileIO <T> extends ContextWrapper{
-    private static final String FILENAME = "file2.sav"; // from lonelyTwitter
+public class DataFileIO extends ContextWrapper{
+    private static final String FILENAME = "file4.sav"; // from lonelyTwitter
 
     public DataFileIO(Context base) {
         super(base);
     }
 
-    public ArrayList<T> loadFromFile() {
+    public ArrayList<FuelUsageEntry> loadFromFile()  {
         /*
             Function taken from lonelyTwitter Project.
             https://github.com/shidahe/lonelyTwitter
@@ -38,12 +38,12 @@ public class DataFileIO <T> extends ContextWrapper{
 
             Gson gson = new Gson();
             // Took from https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html Jan-21-2016
-            Type listType = new TypeToken<ArrayList<T>>() {}.getType();
+            Type listType = new TypeToken<ArrayList<FuelUsageEntry>>() {}.getType();
             return gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
-            return new ArrayList<T>();
+            return new ArrayList<FuelUsageEntry>();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
@@ -51,7 +51,7 @@ public class DataFileIO <T> extends ContextWrapper{
 
     }
 
-    public void saveInFile(ArrayList<T> logs) {
+    public void saveInFile(ArrayList<FuelUsageEntry> logs) {
         /*
             Function taken from lonelyTwitter Project.
             https://github.com/shidahe/lonelyTwitter

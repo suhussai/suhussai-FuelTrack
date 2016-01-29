@@ -7,9 +7,8 @@ import android.content.Context;
  */
 public class FuelLog extends Log<FuelUsageEntry> {
 
-
-    public FuelLog(Context base) {
-        super(base);
+    public FuelLog() {
+        super();
     }
 
     public void addEntry(String dateTaken, String station, String fuelGrade,

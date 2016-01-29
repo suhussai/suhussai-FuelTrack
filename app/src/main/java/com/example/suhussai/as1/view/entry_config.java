@@ -77,6 +77,9 @@ public class entry_config extends Activity {
 
                 appController.addEntry(dateTaken, station, fuelGrade,
                         fuelAmount, odometerReading, fuelUnitCost, fuelCost);
+
+                startActivity(new Intent(entry_config.this, logView.class));
+
             }
 
         });
@@ -85,8 +88,8 @@ public class entry_config extends Activity {
         btnCancelEntryConfig.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setResult(RESULT_OK);
-                startActivity(new Intent(entry_config.this, MainActivity.class));
                 appController.setMessageIDToEdit(-1);
+                startActivity(new Intent(entry_config.this, MainActivity.class));
             }
         });
     }

@@ -16,15 +16,10 @@ import com.example.suhussai.as1.model.Entry;
 public class Log <T extends Entry> {
 
     protected ArrayList<T> logs;
-    private DataFileIO<T> dataFileIO = null;
-    public Log(Context base) {
-        dataFileIO = new DataFileIO<>(base);
-        this.logs = dataFileIO.loadFromFile();
+    public Log() {
+        this.logs = new ArrayList<>();
     }
 
-    public void save(){
-        dataFileIO.saveInFile(logs);
-    }
     public ArrayList<T> getLogs() {
         return logs;
     }

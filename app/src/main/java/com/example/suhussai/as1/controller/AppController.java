@@ -3,8 +3,10 @@ package com.example.suhussai.as1.controller;
 import android.content.Context;
 import android.content.ContextWrapper;
 
+import com.example.suhussai.as1.model.DataFileIO;
 import com.example.suhussai.as1.model.FuelLog;
 import com.example.suhussai.as1.model.FuelUsageEntry;
+import com.example.suhussai.as1.model.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -22,17 +24,19 @@ import java.util.ArrayList;
 /**
  * Created by suhussai on 27/01/16.
  */
-public class AppController extends ContextWrapper{
+public class AppController{
     private FuelLog log = null;
     private int messageIDToEdit = -1;
+    private DataFileIO dataFileIO;
 
     public AppController(Context base) {
-        super(base);
-        log = new FuelLog(base);
+        this.log = new FuelLog();
+        dataFileIO= new DataFileIO(base);
+        this.log.setLogs(dataFileIO.loadFromFile());
     }
 
     public void saveData(){
-        log.save();
+        dataFileIO.saveInFile(this.log.getLogs());
     }
 
     public void removeEntry(int ID) {
@@ -53,6 +57,7 @@ public class AppController extends ContextWrapper{
         log.addEntry(dateTaken, station, fuelGrade,
                     fuelAmount, odometerReading, fuelUnitCost,
                     fuelCost);
+        saveData();
     }
 
     public int getMessageIDToEdit() {
