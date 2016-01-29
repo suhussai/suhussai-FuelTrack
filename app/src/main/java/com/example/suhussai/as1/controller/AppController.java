@@ -55,9 +55,8 @@ public class AppController{
                          float fuelAmount, float odometerReading, float fuelUnitCost,
                          float fuelCost){
         log.addEntry(dateTaken, station, fuelGrade,
-                    fuelAmount, odometerReading, fuelUnitCost,
-                    fuelCost);
-        saveData();
+                fuelAmount, odometerReading, fuelUnitCost,
+                fuelCost);
     }
 
     public int getMessageIDToEdit() {

@@ -68,9 +68,10 @@ public class logView extends Activity{
     }
 
     @Override
-    public void onDestroy() {
+    public void onStop() {
+        // ref: http://stackoverflow.com/questions/18361719/android-activity-ondestroy-is-not-always-called-and-if-called-only-part-of-th
         appController.saveData();
-        super.onDestroy();
+        super.onStop();
     }
 
 
