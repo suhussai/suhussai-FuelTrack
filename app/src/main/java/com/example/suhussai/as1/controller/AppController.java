@@ -51,20 +51,9 @@ public class AppController extends ContextWrapper{
     public void addEntry(String dateTaken, String station, String fuelGrade,
                          float fuelAmount, float odometerReading, float fuelUnitCost,
                          float fuelCost){
-        FuelUsageEntry fuelUsageEntry = new FuelUsageEntry();
-        fuelUsageEntry.setDate(dateTaken);
-        fuelUsageEntry.setStation(station);
-        fuelUsageEntry.setFuelGrade(fuelGrade);
-        fuelUsageEntry.setFuelAmount(fuelAmount);
-        fuelUsageEntry.setOdometerReading(odometerReading);
-        fuelUsageEntry.setFuelUnitCost(fuelUnitCost);
-        fuelUsageEntry.setFuelCost(fuelCost);
-
-        if (log.has(fuelUsageEntry.getMessageID())) {
-            // do nothing
-        }else {
-            log.addEntry(fuelUsageEntry);
-        }
+        log.addEntry(dateTaken, station, fuelGrade,
+                    fuelAmount, odometerReading, fuelUnitCost,
+                    fuelCost);
     }
 
     public int getMessageIDToEdit() {
