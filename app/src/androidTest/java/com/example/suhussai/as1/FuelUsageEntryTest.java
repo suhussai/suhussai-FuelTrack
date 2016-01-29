@@ -39,7 +39,7 @@ public class FuelUsageEntryTest extends ActivityInstrumentationTestCase2 {
                         "Fuel Unit Cost: "+ Float.toString(fuelUnitCost) + " \n" +
                         "Fuel Cost: "+ Float.toString(fuelCost) + " \n";
 
-        assertTrue(correctString.equals(fuelUsageEntry.toString()))
+        assertTrue(correctString.equals(fuelUsageEntry.toString()));
     }
 
 }
