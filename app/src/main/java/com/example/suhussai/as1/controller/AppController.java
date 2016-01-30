@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -47,13 +48,13 @@ public class AppController{
         return log.getEntry(ID);
     }
 
-    public float getTotalCost(){
+    public BigDecimal getTotalCost(){
         return log.getTotalFuelCost();
     }
 
     public void addEntry(String dateTaken, String station, String fuelGrade,
-                         float fuelAmount, float odometerReading, float fuelUnitCost,
-                         float fuelCost){
+                         BigDecimal fuelAmount, BigDecimal odometerReading, BigDecimal fuelUnitCost,
+                         BigDecimal fuelCost){
         log.addEntry(dateTaken, station, fuelGrade,
                 fuelAmount, odometerReading, fuelUnitCost,
                 fuelCost);

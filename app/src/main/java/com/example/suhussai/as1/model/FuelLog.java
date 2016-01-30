@@ -2,6 +2,9 @@ package com.example.suhussai.as1.model;
 
 import android.content.Context;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Created by suhussai on 26/01/16.
  */
@@ -12,8 +15,8 @@ public class FuelLog extends Log<FuelUsageEntry> {
     }
 
     public void addEntry(String dateTaken, String station, String fuelGrade,
-                         float fuelAmount, float odometerReading, float fuelUnitCost,
-                         float fuelCost) {
+                         BigDecimal fuelAmount, BigDecimal odometerReading, BigDecimal fuelUnitCost,
+                         BigDecimal fuelCost) {
         FuelUsageEntry fuelUsageEntry = new FuelUsageEntry();
         fuelUsageEntry.setDate(dateTaken);
         fuelUsageEntry.setStation(station);
@@ -31,10 +34,10 @@ public class FuelLog extends Log<FuelUsageEntry> {
 
     }
 
-    public float getTotalFuelCost() {
-        float total = 0;
+    public BigDecimal getTotalFuelCost() {
+        BigDecimal total = new BigDecimal(0);
         for (FuelUsageEntry e: this.logs){
-            total += e.getFuelCost();
+            total = total.add(e.getFuelCost()).setScale(2, RoundingMode.FLOOR);
         }
         return total;
     }

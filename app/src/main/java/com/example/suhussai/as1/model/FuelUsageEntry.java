@@ -2,14 +2,22 @@ package com.example.suhussai.as1.model;
 
 import com.example.suhussai.as1.model.Entry;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Created by suhussai on 25/01/16.
  */
 public class FuelUsageEntry extends Entry {
     private String station, fuelGrade;
-    private float odometerReading, fuelAmount, fuelUnitCost, fuelCost;
+    private BigDecimal odometerReading, fuelAmount, fuelUnitCost, fuelCost;
 
     public FuelUsageEntry() {
+        this.odometerReading = new BigDecimal(0);
+        this.fuelAmount = new BigDecimal(0);
+        this.fuelUnitCost = new BigDecimal(0);
+        this.fuelCost = new BigDecimal(0);
+
         messageID = 0;
     }
 
@@ -41,49 +49,59 @@ public class FuelUsageEntry extends Entry {
         messageID += this.fuelGrade.hashCode();
     }
 
-    public float getOdometerReading() {
+    public BigDecimal getOdometerReading() {
         return odometerReading;
     }
 
-    public void setOdometerReading(float odometerReading) {
+    public void setOdometerReading(BigDecimal odometerReading) {
         this.odometerReading = odometerReading;
+        this.odometerReading = this.odometerReading.setScale(1, RoundingMode.FLOOR);
 
     }
 
-    public float getFuelAmount() {
+    public BigDecimal getFuelAmount() {
         return fuelAmount;
     }
 
-    public void setFuelAmount(float fuelAmount) {
+    public void setFuelAmount(BigDecimal fuelAmount) {
         this.fuelAmount = fuelAmount;
+        this.fuelAmount = this.fuelAmount.setScale(3, RoundingMode.FLOOR);
     }
 
-    public float getFuelUnitCost() {
+    public BigDecimal getFuelUnitCost() {
         return fuelUnitCost;
     }
 
-    public void setFuelUnitCost(float fuelUnitCost) {
+    public void setFuelUnitCost(BigDecimal fuelUnitCost) {
         this.fuelUnitCost = fuelUnitCost;
-        messageID += Float.toString(this.fuelUnitCost).hashCode();
+        this.fuelUnitCost = this.fuelUnitCost.setScale(1, RoundingMode.FLOOR);
+        messageID += this.fuelUnitCost.hashCode();
     }
 
-    public float getFuelCost() {
+    public BigDecimal getFuelCost() {
         return fuelCost;
     }
 
-    public void setFuelCost(float fuelCost) {
+    public void setFuelCost(BigDecimal fuelCost) {
         this.fuelCost = fuelCost;
+        this.fuelCost = this.fuelCost.setScale(2, RoundingMode.FLOOR);
+    }
+
+    @Override
+    public void setDate(String date) {
+        super.setDate(date);
+        this.messageID += this.getDate().hashCode();
     }
 
     @Override
     public String toString(){
         return "Date: "+ date.toString() + " \n" +
                 "Station: "+ station + " \n" +
-                "Odometer Reading: "+ Float.toString(odometerReading) + " \n" +
+                "Odometer Reading: "+ odometerReading + " \n" +
                 "Fuel Grade: "+ fuelGrade + " \n" +
-                "Fuel Amount: "+ Float.toString(fuelAmount) + " \n" +
-                "Fuel Unit Cost: "+ Float.toString(fuelUnitCost) + " \n" +
-                "Fuel Cost: "+ Float.toString(fuelCost) + " \n";
+                "Fuel Amount: "+ fuelAmount + " \n" +
+                "Fuel Unit Cost: "+ fuelUnitCost + " \n" +
+                "Fuel Cost: "+ fuelCost + " \n";
     }
 
 }

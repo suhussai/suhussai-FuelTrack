@@ -6,6 +6,9 @@ import com.example.suhussai.as1.model.FuelLog;
 import com.example.suhussai.as1.model.FuelUsageEntry;
 import com.example.suhussai.as1.model.Log;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 /**
  * Created by suhussai on 29/01/16.
  */
@@ -18,9 +21,10 @@ public class FuelLogTest extends ActivityInstrumentationTestCase2 {
         String dateValue = "2016/11/11";
         String stationName = "Costco";
         String fuelGrade = "Supreme";
-        float fuelAmount = 23;
-        double fuelUnitCost = 2.13;
-        double fuelCost1 = 39.13;
+        BigDecimal odometerReading = new BigDecimal(13043.21);
+        BigDecimal fuelAmount = new BigDecimal(2.3);
+        BigDecimal fuelUnitCost = new BigDecimal(33.3);
+        BigDecimal fuelCost1 = new BigDecimal(122.33).setScale(2, RoundingMode.FLOOR);
 
 
         FuelUsageEntry fuelUsageEntry = new FuelUsageEntry();
@@ -30,14 +34,16 @@ public class FuelLogTest extends ActivityInstrumentationTestCase2 {
         fuelUsageEntry.setFuelAmount(fuelAmount);
         fuelUsageEntry.setFuelUnitCost(fuelUnitCost);
         fuelUsageEntry.setFuelCost(fuelCost1);
+        fuelUsageEntry.setOdometerReading(odometerReading);
 
 
         dateValue = "2016/11/11";
         stationName = "Costco";
         fuelGrade = "Supreme";
-        fuelAmount = 23;
-        fuelUnitCost = 2.13;
-        double fuelCost2 = 39.13;
+        odometerReading = new BigDecimal(13043.21);
+        fuelAmount = new BigDecimal(12.3);
+        fuelUnitCost = new BigDecimal(833.3);
+        BigDecimal fuelCost2 = new BigDecimal(522.33).setScale(2, RoundingMode.FLOOR);
 
         FuelUsageEntry fuelUsageEntry2 = new FuelUsageEntry();
         fuelUsageEntry2.setDate(dateValue);
@@ -51,7 +57,9 @@ public class FuelLogTest extends ActivityInstrumentationTestCase2 {
         fuelLog.addEntry(fuelUsageEntry);
         fuelLog.addEntry(fuelUsageEntry2);
 
-        assertTrue(fuelLog.getTotalFuelCost() == fuelCost1 + fuelCost2);
+        BigDecimal bd = fuelCost1.add(fuelCost2);
+        BigDecimal bd2 = fuelLog.getTotalFuelCost();
+        assertTrue(bd2.compareTo(bd) == 0);
 
         fuelLog.removeEntry(fuelUsageEntry.getMessageID());
 
@@ -59,7 +67,7 @@ public class FuelLogTest extends ActivityInstrumentationTestCase2 {
 
         fuelLog.removeEntry(fuelUsageEntry2.getMessageID());
 
-        assertTrue(fuelLog.getTotalFuelCost() == 0);
+        assertTrue(fuelLog.getTotalFuelCost().compareTo(new BigDecimal(0)) == 0);
 
     }
 

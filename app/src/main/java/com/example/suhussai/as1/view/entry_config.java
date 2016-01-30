@@ -11,6 +11,8 @@ import com.example.suhussai.as1.R;
 import com.example.suhussai.as1.controller.AppController;
 import com.example.suhussai.as1.controller.AppControllerHandler;
 
+import java.math.BigDecimal;
+
 public class entry_config extends Activity {
 
     private AppController appController = null;
@@ -31,13 +33,13 @@ public class entry_config extends Activity {
             editText = (EditText) findViewById(R.id.editTextFuelGrade);
             editText.setText(appController.getEntry(messageID).getFuelGrade());
             editText = (EditText) findViewById(R.id.editTextFuelAmount);
-            editText.setText(Float.toString(appController.getEntry(messageID).getFuelAmount()));
+            editText.setText((appController.getEntry(messageID).getFuelAmount()).toString());
             editText = (EditText) findViewById(R.id.editTextOdometerReading);
-            editText.setText(Float.toString(appController.getEntry(messageID).getOdometerReading()));
+            editText.setText((appController.getEntry(messageID).getOdometerReading()).toString());
             editText = (EditText) findViewById(R.id.editTextFuelUnitCost);
-            editText.setText(Float.toString(appController.getEntry(messageID).getFuelUnitCost()));
+            editText.setText((appController.getEntry(messageID).getFuelUnitCost()).toString());
             editText = (EditText) findViewById(R.id.editTextFuelCost);
-            editText.setText(Float.toString(appController.getEntry(messageID).getFuelCost()));
+            editText.setText((appController.getEntry(messageID).getFuelCost()).toString());
 
         }
     }
@@ -67,13 +69,13 @@ public class entry_config extends Activity {
                 editText = (EditText) findViewById(R.id.editTextFuelGrade);
                 String fuelGrade = editText.getText().toString();
                 editText = (EditText) findViewById(R.id.editTextFuelAmount);
-                float fuelAmount = Float.parseFloat(editText.getText().toString());
+                BigDecimal fuelAmount = new BigDecimal(editText.getText().toString());
                 editText = (EditText) findViewById(R.id.editTextFuelUnitCost);
-                float fuelUnitCost = Float.parseFloat(editText.getText().toString());
+                BigDecimal fuelUnitCost = new BigDecimal(editText.getText().toString());
                 editText = (EditText) findViewById(R.id.editTextOdometerReading);
-                float odometerReading = Float.parseFloat(editText.getText().toString());
+                BigDecimal odometerReading = new BigDecimal(editText.getText().toString());
                 editText = (EditText) findViewById(R.id.editTextFuelCost);
-                float fuelCost = Float.parseFloat(editText.getText().toString());
+                BigDecimal fuelCost = new BigDecimal(editText.getText().toString());
 
                 appController.addEntry(dateTaken, station, fuelGrade,
                         fuelAmount, odometerReading, fuelUnitCost, fuelCost);

@@ -19,10 +19,10 @@ public class LogTest extends ActivityInstrumentationTestCase2 {
     public void testGetEntry(){
         Log log = new Log();
         Entry entry1 = new FuelUsageEntry();
-        entry1.setDate("2016/11/11");
+        entry1.setDate("2012/11/11");
         log.addEntry(entry1);
         Entry entry2 = new FuelUsageEntry();
-        entry2.setDate("2016/11/11");
+        entry2.setDate("2016/11/12");
         log.addEntry(entry2);
 
         Entry e1 = log.getEntry(entry1.getMessageID());
@@ -69,10 +69,10 @@ public class LogTest extends ActivityInstrumentationTestCase2 {
     public void testRemoveEntry() {
         Log log = new Log();
         Entry entry1 = new FuelUsageEntry();
-        entry1.setDate("2016/11/11");
+        entry1.setDate("2016/1/11");
         log.addEntry(entry1);
         Entry entry2 = new FuelUsageEntry();
-        entry2.setDate("2016/11/11");
+        entry2.setDate("2014/11/12");
         log.addEntry(entry2);
 
         assertTrue(log.has(entry1.getMessageID()));
@@ -80,10 +80,10 @@ public class LogTest extends ActivityInstrumentationTestCase2 {
 
         log.removeEntry(entry2.getMessageID());
 
-        assertFalse(log.has(entry1.getMessageID()));
-        assertTrue(log.has(entry2.getMessageID()));
+        assertFalse(log.has(entry2.getMessageID()));
+        assertTrue(log.has(entry1.getMessageID()));
 
-        log.removeEntry(entry2.getMessageID());
+        log.removeEntry(entry1.getMessageID());
 
         assertFalse(log.has(entry1.getMessageID()));
         assertFalse(log.has(entry2.getMessageID()));
