@@ -41,6 +41,7 @@ public class logView extends Activity{
         btnBack.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 setResult(RESULT_OK);
+                appController.setMessageIDToEdit(-1);
                 startActivity(new Intent(logView.this, MainActivity.class));
             }
         });

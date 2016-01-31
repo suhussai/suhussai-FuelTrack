@@ -21,7 +21,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"
-        android:hint=""/>
+        android:hint="@string/Date"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -29,7 +29,9 @@
         android:id="@+id/editTextStation"
         android:layout_below="@+id/editTextDate"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/editTextDate" />
+        android:layout_alignEnd="@+id/editTextDate"
+        android:hint="@string/Station"/>
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -38,7 +40,9 @@
         android:ems="10"
         android:id="@+id/editTextOdometerReading"
         android:layout_below="@+id/editTextStation"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:hint="@string/odometerReading"/>
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -46,7 +50,9 @@
         android:id="@+id/editTextFuelGrade"
         android:layout_below="@+id/editTextOdometerReading"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/editTextOdometerReading" />
+        android:layout_alignEnd="@+id/editTextOdometerReading"
+        android:hint="@string/FuelGrade"/>
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -55,7 +61,9 @@
         android:ems="10"
         android:id="@+id/editTextFuelAmount"
         android:layout_below="@+id/editTextFuelGrade"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:hint="@string/FuelAmount"/>
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,31 +72,27 @@
         android:ems="10"
         android:id="@+id/editTextFuelUnitCost"
         android:layout_below="@+id/editTextFuelAmount"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:hint="@string/FuelUnitCost"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editTextFuelCost"
-        android:layout_below="@+id/editTextFuelUnitCost"
-        android:layout_alignParentStart="true" />
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/Cancel"
         android:id="@+id/btnCancelEntryConfig"
-        android:layout_below="@+id/editTextFuelCost"
+        android:layout_below="@+id/editTextFuelUnitCost"
         android:layout_alignParentStart="true"
         android:layout_marginTop="59dp" />
 
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/Save"
         android:id="@+id/btnSaveEntryConfig"
         android:layout_alignTop="@+id/btnCancelEntryConfig"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

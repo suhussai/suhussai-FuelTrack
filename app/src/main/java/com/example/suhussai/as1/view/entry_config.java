@@ -12,6 +12,7 @@ import com.example.suhussai.as1.controller.AppController;
 import com.example.suhussai.as1.controller.AppControllerHandler;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class entry_config extends Activity {
 
@@ -38,12 +39,13 @@ public class entry_config extends Activity {
             editText.setText((appController.getEntry(messageID).getOdometerReading()).toString());
             editText = (EditText) findViewById(R.id.editTextFuelUnitCost);
             editText.setText((appController.getEntry(messageID).getFuelUnitCost()).toString());
-            editText = (EditText) findViewById(R.id.editTextFuelCost);
-            editText.setText((appController.getEntry(messageID).getFuelCost()).toString());
 
         }
     }
 
+    private void displayError(EditText editText, String errorMessage){
+        editText.setError(errorMessage);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class entry_config extends Activity {
         Button btnSaveEntryConfig = (Button) findViewById(R.id.btnSaveEntryConfig);
         btnSaveEntryConfig.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 // remove entry if
                 // editing
                 if (appController.getMessageIDToEdit() != -1) {
@@ -63,20 +66,76 @@ public class entry_config extends Activity {
                 // add new entry
                 EditText editText;
                 editText = (EditText) findViewById(R.id.editTextDate);
-                String dateTaken = editText.getText().toString();
-                editText = (EditText) findViewById(R.id.editTextStation);
-                String station = editText.getText().toString();
-                editText = (EditText) findViewById(R.id.editTextFuelGrade);
-                String fuelGrade = editText.getText().toString();
-                editText = (EditText) findViewById(R.id.editTextFuelAmount);
-                BigDecimal fuelAmount = new BigDecimal(editText.getText().toString());
-                editText = (EditText) findViewById(R.id.editTextFuelUnitCost);
-                BigDecimal fuelUnitCost = new BigDecimal(editText.getText().toString());
-                editText = (EditText) findViewById(R.id.editTextOdometerReading);
-                BigDecimal odometerReading = new BigDecimal(editText.getText().toString());
-                editText = (EditText) findViewById(R.id.editTextFuelCost);
-                BigDecimal fuelCost = new BigDecimal(editText.getText().toString());
+                String dateTaken = null;
+                if (editText.getText().toString().matches("\\d+-\\d+-\\d+")) {
+                    // "...yyyy-mm-dd format, e.g., 2016-01-18..."
+                    dateTaken = editText.getText().toString();
+                }
+                else {
+                    displayError(editText, "Inappropriate format!");
+                    return;
+                }
 
+                editText = (EditText) findViewById(R.id.editTextStation);
+                String station = null;
+                if (editText.getText().toString().matches("^\\w+$")) {
+                    // "...textual, e.g., regular..."
+                    station = editText.getText().toString();
+                }
+                else {
+                    displayError(editText, "Inappropriate format!");
+                    return;
+                }
+
+                editText = (EditText) findViewById(R.id.editTextFuelGrade);
+                String fuelGrade = null;
+                if (editText.getText().toString().matches("^\\w+$")) {
+                    // "...textual, e.g., Costco..."
+                    fuelGrade = editText.getText().toString();
+                }
+                else {
+                    displayError(editText, "Inappropriate format!");
+                    return;
+                }
+
+
+                editText = (EditText) findViewById(R.id.editTextFuelAmount);
+                BigDecimal fuelAmount = null;
+                if (editText.getText().toString().matches("^\\d+\\.\\d{3}$")) {
+                    // "...numeric to 3 decimal places..."
+                    fuelAmount = new BigDecimal(editText.getText().toString());
+                }
+                else {
+                    displayError(editText, "Inappropriate format!");
+                    return;
+                }
+
+
+                editText = (EditText) findViewById(R.id.editTextFuelUnitCost);
+                BigDecimal fuelUnitCost = null;
+                if (editText.getText().toString().matches("^\\d+\\.\\d{1}$")) {
+                    // "...numeric to 1 decimal place..."
+                    fuelUnitCost = new BigDecimal(editText.getText().toString());
+                }
+                else {
+                    displayError(editText, "Inappropriate format!");
+                    return;
+                }
+
+
+                editText = (EditText) findViewById(R.id.editTextOdometerReading);
+                BigDecimal odometerReading = null;
+                if (editText.getText().toString().matches("^\\d+\\.\\d{1}$")) {
+                    // "...km, numeric to 1 decimal place..."
+                    odometerReading = new BigDecimal(editText.getText().toString());
+                }
+                else {
+                    displayError(editText, "Inappropriate format!");
+                    return;
+                }
+
+
+                BigDecimal fuelCost = fuelAmount.multiply(fuelUnitCost).setScale(2, RoundingMode.CEILING);
                 appController.addEntry(dateTaken, station, fuelGrade,
                         fuelAmount, odometerReading, fuelUnitCost, fuelCost);
 

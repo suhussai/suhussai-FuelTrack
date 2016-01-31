@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text=""
         android:id="@+id/textViewTotalCost"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/listView"
@@ -40,8 +40,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Select Item To Edit"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/SelectItemToEdit"
         android:id="@+id/textView"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
