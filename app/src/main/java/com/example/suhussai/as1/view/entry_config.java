@@ -9,7 +9,6 @@ import android.widget.EditText;
 
 import com.example.suhussai.as1.R;
 import com.example.suhussai.as1.controller.AppController;
-import com.example.suhussai.as1.controller.AppControllerHandler;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -50,7 +49,7 @@ public class entry_config extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        appController = AppControllerHandler.getAppController(this);
+        appController = AppController.getAppController(this);
         setContentView(R.layout.activity_entry_config);
 
         Button btnSaveEntryConfig = (Button) findViewById(R.id.btnSaveEntryConfig);

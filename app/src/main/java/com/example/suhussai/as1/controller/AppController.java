@@ -29,8 +29,17 @@ public class AppController{
     private FuelLog log = null;
     private int messageIDToEdit = -1;
     private DataFileIO dataFileIO;
+    private static AppController appController = null;
 
-    public AppController(Context base) {
+    public static AppController getAppController(Context base) {
+        if (appController == null) {
+            appController = new AppController(base);
+        }
+        return appController;
+    }
+
+
+    private AppController(Context base) {
         this.log = new FuelLog();
         dataFileIO= new DataFileIO(base);
         this.log.setLogs(dataFileIO.loadFromFile());

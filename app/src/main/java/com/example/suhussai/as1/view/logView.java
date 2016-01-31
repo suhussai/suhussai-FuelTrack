@@ -12,18 +12,6 @@ import android.widget.TextView;
 
 import com.example.suhussai.as1.R;
 import com.example.suhussai.as1.controller.AppController;
-import com.example.suhussai.as1.controller.AppControllerHandler;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 public class logView extends Activity{
 
@@ -34,7 +22,7 @@ public class logView extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_view);
-        appController = AppControllerHandler.getAppController(this);
+        appController = AppController.getAppController(this);
         listView = (ListView) findViewById(R.id.listView);
 
         Button btnBack = (Button) findViewById(R.id.btnBack);
@@ -64,13 +52,13 @@ public class logView extends Activity{
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.list_item, appController.getLogs());
         listView.setAdapter(adapter);
         TextView textView = (TextView) findViewById(R.id.textViewTotalCost);
-        appController = AppControllerHandler.getAppController(this);
+        appController = AppController.getAppController(this);
         textView.setText("Total Cost: $" + appController.getTotalCost());
     }
 
     @Override
     public void onStop() {
-        // ref: http://stackoverflow.com/questions/18361719/android-activity-ondestroy-is-not-always-called-and-if-called-only-part-of-the
+        // ref: http://stackoverflow.com/questions/18361719/android-activity-ondestroy-is-not-always-called-and-if-called-only-part-of-th
         appController.saveData();
         super.onStop();
     }
