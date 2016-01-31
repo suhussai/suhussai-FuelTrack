@@ -26,6 +26,11 @@ public class Log <T extends Entry> {
     public void setLogs(ArrayList<T> logs){
         this.logs = logs;
     }
+    public void setEntry(int messageID, T newT) {
+        T itemToChange = getEntry(messageID);
+        itemToChange.setDate(newT.getDate());
+    }
+
     public T getEntry(int messageID) {
         Iterator<T> iter = logs.iterator();
         while (iter.hasNext()) {

@@ -59,7 +59,7 @@ public class entry_config extends Activity {
                 // remove entry if
                 // editing
                 if (appController.getMessageIDToEdit() != -1) {
-                    appController.removeEntry(appController.getMessageIDToEdit());
+                    //appController.removeEntry(appController.getMessageIDToEdit());
                 }
 
                 // add new entry
@@ -135,8 +135,14 @@ public class entry_config extends Activity {
 
 
                 BigDecimal fuelCost = fuelAmount.multiply(fuelUnitCost).setScale(2, RoundingMode.CEILING);
-                appController.addEntry(dateTaken, station, fuelGrade,
-                        fuelAmount, odometerReading, fuelUnitCost, fuelCost);
+                if (appController.getMessageIDToEdit() != -1) {
+                    appController.setEntry(appController.getMessageIDToEdit(), dateTaken, station, fuelGrade,
+                            fuelAmount, odometerReading, fuelUnitCost, fuelCost);
+                }
+                else {
+                    appController.addEntry(dateTaken, station, fuelGrade,
+                            fuelAmount, odometerReading, fuelUnitCost, fuelCost);
+                }
 
                 startActivity(new Intent(entry_config.this, logView.class));
 

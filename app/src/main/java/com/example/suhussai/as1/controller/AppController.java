@@ -56,6 +56,13 @@ public class AppController{
     public FuelUsageEntry getEntry(int ID) {
         return log.getEntry(ID);
     }
+    public void setEntry(int ID, String dateTaken, String station, String fuelGrade,
+                         BigDecimal fuelAmount, BigDecimal odometerReading, BigDecimal fuelUnitCost,
+                         BigDecimal fuelCost) {
+        log.setEntry(ID, dateTaken, station, fuelGrade,
+                fuelAmount, odometerReading, fuelUnitCost,
+                fuelCost);
+    }
 
     public BigDecimal getTotalCost(){
         return log.getTotalFuelCost();

@@ -71,5 +71,56 @@ public class FuelLogTest extends ActivityInstrumentationTestCase2 {
 
     }
 
+    public void testSetFuelUsageEntry() throws Exception {
+        FuelLog log = new FuelLog();
+        String dateValue = "2016/11/11";
+        String stationName = "Costco";
+        String fuelGrade = "Supreme";
+        BigDecimal odometerReading = new BigDecimal(13043.21).setScale(1, RoundingMode.FLOOR);
+        BigDecimal fuelAmount = new BigDecimal(2.3).setScale(3, RoundingMode.FLOOR);
+        BigDecimal fuelUnitCost = new BigDecimal(33.3).setScale(1, RoundingMode.FLOOR);
+        BigDecimal fuelCost1 = new BigDecimal(122.33).setScale(2, RoundingMode.FLOOR);
+
+
+        FuelUsageEntry fuelUsageEntry = new FuelUsageEntry();
+        fuelUsageEntry.setDate(dateValue);
+        fuelUsageEntry.setStation(stationName);
+        fuelUsageEntry.setFuelGrade(fuelGrade);
+        fuelUsageEntry.setFuelAmount(fuelAmount);
+        fuelUsageEntry.setFuelUnitCost(fuelUnitCost);
+        fuelUsageEntry.setFuelCost(fuelCost1);
+        fuelUsageEntry.setOdometerReading(odometerReading);
+
+        log.addEntry(fuelUsageEntry);
+
+        assertTrue(log.has(fuelUsageEntry.getMessageID()));
+
+        dateValue = "2016/11/11";
+        stationName = "Costco";
+        fuelGrade = "Supreme";
+        odometerReading = new BigDecimal(13043.21).setScale(1, RoundingMode.FLOOR);
+        fuelAmount = new BigDecimal(12.3).setScale(3, RoundingMode.FLOOR);
+        fuelUnitCost = new BigDecimal(833.3).setScale(1, RoundingMode.FLOOR);
+        BigDecimal fuelCost2 = new BigDecimal(522.33).setScale(2, RoundingMode.FLOOR);
+
+        FuelUsageEntry fuelUsageEntry2 = new FuelUsageEntry();
+        fuelUsageEntry2.setDate(dateValue);
+        fuelUsageEntry2.setStation(stationName);
+        fuelUsageEntry2.setFuelGrade(fuelGrade);
+        fuelUsageEntry2.setFuelAmount(fuelAmount);
+        fuelUsageEntry2.setFuelUnitCost(fuelUnitCost);
+        fuelUsageEntry2.setFuelCost(fuelCost2);
+        fuelUsageEntry2.setOdometerReading(odometerReading);
+
+
+        log.setEntry(fuelUsageEntry.getMessageID(), dateValue, stationName, fuelGrade,
+                fuelAmount, odometerReading, fuelUnitCost, fuelCost2);
+        //assertTrue(log.has(fuelUsageEntry2.getMessageID()));
+        assertTrue(log.has(fuelUsageEntry.getMessageID()));
+        assertTrue(log.has(fuelUsageEntry2.getMessageID()));
+        assertTrue(log.getEntry(fuelUsageEntry.getMessageID()).toString().compareTo(fuelUsageEntry2.toString()) == 0);
+    }
+
+
 }
 

@@ -46,6 +46,23 @@ public class LogTest extends ActivityInstrumentationTestCase2 {
         assertTrue(log.has(entry2.getMessageID()));
     }
 
+    public void testSetEntry() throws Exception {
+        Log log = new Log();
+        Entry entry1 = new FuelUsageEntry();
+        entry1.setDate("2016/11/11");
+        log.addEntry(entry1);
+        assertTrue(log.has(entry1.getMessageID()));
+
+
+        Entry entry2 = new FuelUsageEntry();
+        entry2.setDate("2099/1/11");
+        log.setEntry(entry1.getMessageID(), entry2);
+        assertTrue(log.has(entry1.getMessageID()));
+        assertTrue(log.has(entry2.getMessageID()));
+        assertTrue(log.getEntry(entry1.getMessageID()).getDate() == entry2.getDate());
+    }
+
+
     public void testHas() throws Exception {
         Log log = new Log();
 

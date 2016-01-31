@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public abstract class Entry {
     protected int messageID;
-    protected String date;
+    protected String date="";
     public abstract int getMessageID();
     protected abstract void setMessageID();
 
@@ -15,7 +15,9 @@ public abstract class Entry {
         return this.date;
     }
     public void setDate(String date){
+        this.messageID -= date.hashCode();
         this.date = date;
+        this.messageID += date.hashCode();
     }
 
     public abstract String toString();

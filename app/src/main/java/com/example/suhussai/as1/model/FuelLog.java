@@ -4,6 +4,7 @@ import android.content.Context;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Iterator;
 
 /**
  * Created by suhussai on 26/01/16.
@@ -33,6 +34,21 @@ public class FuelLog extends Log<FuelUsageEntry> {
         }
 
     }
+
+    public void setEntry(int messageID, String dateTaken, String station, String fuelGrade,
+                         BigDecimal fuelAmount, BigDecimal odometerReading, BigDecimal fuelUnitCost,
+                         BigDecimal fuelCost) {
+        FuelUsageEntry fuelUsageEntry = getEntry(messageID);
+        fuelUsageEntry.setDate(dateTaken);
+        fuelUsageEntry.setStation(station);
+        fuelUsageEntry.setFuelGrade(fuelGrade);
+        fuelUsageEntry.setFuelAmount(fuelAmount);
+        fuelUsageEntry.setOdometerReading(odometerReading);
+        fuelUsageEntry.setFuelUnitCost(fuelUnitCost);
+        fuelUsageEntry.setFuelCost(fuelCost);
+
+    }
+
 
     public BigDecimal getTotalFuelCost() {
         BigDecimal total = new BigDecimal(0);
