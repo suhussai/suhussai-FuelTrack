@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">As1</string>
+    <string name="app_name">suhussai-FuelTracker</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_entry_config">entry_config</string>
     <string name="Cancel">Cancel</string>
